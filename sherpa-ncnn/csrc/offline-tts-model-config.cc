@@ -16,6 +16,9 @@ void OfflineTtsModelConfig::Register(ParseOptions *po) {
 
   po->Register("debug", &debug,
                "true to print model information while loading it.");
+
+  po->Register("use-vulkan-compute", &use_vulkan_compute,
+               "Whether to use Vulkan GPU compute. 1 to use GPU, 0 to use CPU.");
 }
 
 bool OfflineTtsModelConfig::Validate() const {
@@ -39,7 +42,8 @@ std::string OfflineTtsModelConfig::ToString() const {
   os << "OfflineTtsModelConfig(";
   os << "vits=" << vits.ToString() << ", ";
   os << "num_threads=" << num_threads << ", ";
-  os << "debug=" << (debug ? "True" : "False");
+  os << "debug=" << (debug ? "True" : "False") << ", ";
+  os << "use_vulkan_compute=" << use_vulkan_compute;
 
   return os.str();
 }

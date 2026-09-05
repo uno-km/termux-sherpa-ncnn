@@ -13,6 +13,9 @@
 #include <vector>
 
 #include "net.h"  // NOLINT
+#if NCNN_VULKAN
+#include "gpu.h"  // NOLINT
+#endif
 #include "sherpa-ncnn/csrc/math.h"
 
 namespace sherpa_ncnn {
@@ -404,6 +407,32 @@ class OfflineTtsVitsModel::Impl {
   }
 
   void InitNet() {
+#if NCNN_VULKAN
+    bool has_gpu = ncnn::get_gpu_count() > 0;
+    if (config_.use_vulkan_compute) {
+      if (!has_gpu) {
+        fprintf(stderr, "[FAIL-FAST] Vulkan GPU compute requested, but no Vulkan GPU found!\n");
+        exit(EXIT_FAILURE);
+      }
+      enc_p_.opt.use_vulkan_compute = true;
+      dp_.opt.use_vulkan_compute = true;
+      flow_.opt.use_vulkan_compute = true;
+      decoder_.opt.use_vulkan_compute = true;
+      if (meta_.num_speakers > 1) {
+        embedding_.opt.use_vulkan_compute = true;
+      }
+      fprintf(stderr, "[AMEVA-VULKAN-TTS] Vulkan GPU Compute Pipeline ACTIVE on %s (Device index: 0, Total GPUs: %d)\n",
+              ncnn::get_gpu_info(0).device_name(), ncnn::get_gpu_count());
+    } else {
+      fprintf(stderr, "[AMEVA-VULKAN-TTS] Running on CPU (use_vulkan_compute=0)\n");
+    }
+#else
+    if (config_.use_vulkan_compute) {
+      fprintf(stderr, "[FAIL-FAST] Vulkan GPU compute requested, but binary was built without NCNN_VULKAN!\n");
+      exit(EXIT_FAILURE);
+    }
+#endif
+
     InitEncoderNet();
     InitDurationPredictorNet();
     InitFlowNet();

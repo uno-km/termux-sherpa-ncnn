@@ -17,12 +17,17 @@ struct OfflineTtsModelConfig {
 
   int32_t num_threads = 1;
   bool debug = false;
+  int32_t use_vulkan_compute = 1;
 
   OfflineTtsModelConfig() = default;
 
   OfflineTtsModelConfig(const OfflineTtsVitsModelConfig &vits,
-                        int32_t num_threads, bool debug)
-      : vits(vits), num_threads(num_threads), debug(debug) {}
+                        int32_t num_threads, bool debug,
+                        int32_t use_vulkan_compute = 1)
+      : vits(vits),
+        num_threads(num_threads),
+        debug(debug),
+        use_vulkan_compute(use_vulkan_compute) {}
 
   void Register(ParseOptions *po);
   bool Validate() const;
