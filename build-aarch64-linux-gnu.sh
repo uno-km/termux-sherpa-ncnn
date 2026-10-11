@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 
 if ! command -v aarch64-linux-gnu-gcc  &> /dev/null; then
   echo "Please install a toolchain for cross-compiling."

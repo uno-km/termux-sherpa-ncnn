@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 
 if ! command -v riscv64-linux-gnu-g++  &> /dev/null; then
   echo "Please install the toolchain first."

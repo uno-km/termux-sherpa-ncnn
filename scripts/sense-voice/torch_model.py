@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 # This file is modified from
 # https://github.com/modelscope/FunASR/blob/main/funasr/models/sense_voice/model.py
 

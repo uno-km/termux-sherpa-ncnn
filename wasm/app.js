@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0 OR Commercial-License
+ */
 // This file copies and modifies code
 // from https://mdn.github.io/web-dictaphone/scripts/app.js
 // and https://gist.github.com/meziantou/edb7217fddfbb70e899e
